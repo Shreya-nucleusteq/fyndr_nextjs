@@ -3,7 +3,6 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import SignOutButton from "@/components/global/buttons/sign-out-button";
-import { SignOutResponse } from "@/types/auth/auth.response";
 
 // Mock next-auth - declare mock function inside the factory
 vi.mock("next-auth/react", () => ({
@@ -87,7 +86,8 @@ describe("SignOutButton Component", async () => {
   });
 
   it("calls signOut with correct parameters on successful logout", async () => {
-    mockSignOut.mockResolvedValueOnce(undefined);
+    // Fix: Mock resolved value properly for void return type
+    mockSignOut.mockResolvedValueOnce(undefined as any);
 
     render(<SignOutButton>Sign Out</SignOutButton>);
 
@@ -121,7 +121,8 @@ describe("SignOutButton Component", async () => {
   });
 
   it("handles multiple clicks correctly", async () => {
-    mockSignOut.mockResolvedValue(undefined);
+    // Fix: Mock resolved value properly for void return type
+    mockSignOut.mockResolvedValue(undefined as any);
 
     render(<SignOutButton>Sign Out</SignOutButton>);
 
@@ -137,8 +138,9 @@ describe("SignOutButton Component", async () => {
   });
 
   it("handles async operation correctly", async () => {
-    let resolveSignOut: () => SignOutResponse;
-    const signOutPromise = new Promise<SignOutResponse>((resolve) => {
+    // Fix: Create promise that resolves to the correct type
+    let resolveSignOut: (value?: any) => void;
+    const signOutPromise = new Promise<any>((resolve) => {
       resolveSignOut = resolve;
     });
 
@@ -153,7 +155,7 @@ describe("SignOutButton Component", async () => {
     expect(mockSignOut).toHaveBeenCalledWith({ redirectTo: "/home" });
 
     // Resolve the promise
-    resolveSignOut!();
+    resolveSignOut!(undefined);
 
     await waitFor(() => {
       expect(mockSignOut).toHaveBeenCalledTimes(1);

@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/form";
 import ROUTES from "@/constants/routes";
 import { ProcessedFileProps } from "@/lib/utils/files/upload.utils";
-import { StoreCategory } from "@/types/api-response/catalogue.response";
+import { StoreCategory } from "@/types/catalogue/catalogue.types";
 import { useCategoryStore } from "@/zustand/stores/store-category.store";
 
 import { categorySchema } from "./schema";

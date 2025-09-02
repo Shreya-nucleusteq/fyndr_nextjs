@@ -5,13 +5,13 @@ import { Flag, MessageCircleMore } from "lucide-react";
 import Button from "@/components/global/buttons";
 import { useUser } from "@/hooks/auth";
 import { Comment } from "@/types/business/business.types";
-import { Campaign } from "@/types/campaign/campaign.types";
 
 import ReplyModal from "./reply-modal";
 import ReportModal from "./report-modal";
+import { ReviewBusinessProps } from "../business-ratings-and-reviews";
 
 type Props = {
-  business: Campaign["biz"];
+  business: ReviewBusinessProps;
   comment: Comment;
   qrCode: string;
 };

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { StoreModifier } from "@/types/api-response/catalogue.response";
+import { StoreModifier } from "@/types/catalogue/catalogue.types";
 
 interface ModifierStore {
   modifiers: StoreModifier[];

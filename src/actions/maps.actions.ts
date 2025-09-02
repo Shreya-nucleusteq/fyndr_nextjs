@@ -144,3 +144,94 @@ export async function getPlaceDataWithZipcodeAndCountry(params: {
     };
   }
 }
+
+export async function getCoordinates(params: {
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  postalCode?: string;
+}) {
+  const { addressLine1, addressLine2, city, state, country, postalCode } =
+    params;
+ const fullAddress = [
+    addressLine1,
+    addressLine2,
+    city,
+    state,
+    postalCode,
+    country,
+  ]
+    .map((part) => part?.trim())
+    .filter(Boolean) 
+    .join(", "); 
+
+
+  try {
+    const response = await client.geocode({
+      params: {
+        address: fullAddress,
+        key: GOOGLE_MAPS_API_KEY,
+        language: "en",
+      },
+    });
+
+    if (response.data.status === "OK" && response.data.results.length > 0) {
+      const { lat, lng } = response.data.results[0].geometry.location;
+      const addressList = response.data.results[0].address_components;
+
+      let city: string = "";
+      let state: string = "";
+
+      addressList.forEach((component) => {
+        if (
+          component.types.includes("administrative_area_level_1" as AddressType)
+        )
+          state = component.short_name;
+        if (component.types.includes("locality" as AddressType))
+          city = component.short_name;
+        else if (
+          component.types.includes("postal_town" as AddressType) &&
+          !city
+        )
+          city = component.short_name;
+      });
+      
+      return {
+        success: true,
+        status: response.status,
+        data: {
+          city,
+          state,
+          lat,
+          lng,
+        },
+      };
+    }
+
+    console.warn(`Geocoding failed: ${response.data.status}`);
+    return {
+      success: false,
+      status: response.status,
+      data: {
+        city: "",
+        state: "",
+        lat: null,
+        lng: null,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching coordinates:", error);
+    return {
+      success: false,
+      status: 500,
+      data: {
+        city: "",
+        state: "",
+        lat: null,
+        lng: null,
+      },
+    };
+  }
+}

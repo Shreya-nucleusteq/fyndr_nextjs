@@ -34,7 +34,7 @@ const InputWrapper = ({
           <div className="placeholder relative left-0 top-[-14px] z-20 bg-transparent px-2 text-base font-normal">
             <span className="flex-center h-[26px] gap-2">
               <span className="flex gap-1">
-                <span>{label}</span>
+                <span className="text-[#999999]">{label}</span>
                 {showRequired && <span className="text-red-600">*</span>}
               </span>
               {info && <InfoTooltip>{info}</InfoTooltip>}

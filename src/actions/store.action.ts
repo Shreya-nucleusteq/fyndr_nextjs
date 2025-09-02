@@ -9,6 +9,7 @@ import {
   GetStore,
   GetStoreCategories,
   GetStoreDetails,
+  GetStoreLocations,
   LikeBusiness,
 } from "@/types/store/store.action.types";
 
@@ -23,6 +24,12 @@ export const onGetStore: GetStore = async ({ params }) => {
 export const onGetStoreCategories: GetStoreCategories = async ({ params }) => {
   const { bizId, catalogueId } = params;
   const endpoint = `${API_BASE_URL}/catalogue/categories/fetch/${bizId}/${catalogueId}`;
+  return _get(endpoint);
+};
+
+export const onGetStoreLocations: GetStoreLocations = async ({ params }) => {
+  const { storeUrl } = params;
+  const endpoint = `${API_BASE_URL}/catalogue/fetch_location/${storeUrl}`;
   return _get(endpoint);
 };
 

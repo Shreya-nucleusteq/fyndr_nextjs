@@ -1,0 +1,1 @@
+export type DisputeReasonResponse = Record<string, string>;

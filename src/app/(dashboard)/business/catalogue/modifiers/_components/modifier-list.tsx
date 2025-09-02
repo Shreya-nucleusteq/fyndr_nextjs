@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import { onDeleteModifier } from "@/actions/catalogue.actions";
 import toast from "@/components/global/toast";
-import { StoreModifier } from "@/types/api-response/catalogue.response";
+import { StoreModifier } from "@/types/catalogue/catalogue.types";
 import { useModifierStore } from "@/zustand/stores/store-modifier.store";
 
 import List from "../../../_components/list";

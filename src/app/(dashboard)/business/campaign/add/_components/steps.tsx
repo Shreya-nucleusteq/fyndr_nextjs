@@ -1,3 +1,4 @@
+"use client";
 import DescriptionForm from "./description-component";
 import ImagesVidoesComponent from "./images-video-component";
 import LocationList from "./location-list";

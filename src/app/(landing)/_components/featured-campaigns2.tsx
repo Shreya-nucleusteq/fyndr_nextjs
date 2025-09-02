@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import { Button } from "@/components/ui/button";
+import Button from "@/components/global/buttons";
 import ROUTES from "@/constants/routes";
 import { Campaign } from "@/types/campaign/campaign.types";
 
@@ -18,7 +18,6 @@ const FeaturedCampaigns = async ({ campaigns: featuredCampaigns }: Props) => {
     <section className="mt-10 flex flex-col rounded-10 bg-primary-10 p-4">
       <h2 className="heading-6-medium text-black-80">Featured Fynds</h2>
       {featuredCampaigns?.length > 0 && (
-        // <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div className="my-6 grid grid-cols-[repeat(auto-fit,minmax(264px,1fr))] place-items-center gap-4">
           {featuredCampaigns.map((campaign) => (
             <Link
@@ -31,11 +30,7 @@ const FeaturedCampaigns = async ({ campaigns: featuredCampaigns }: Props) => {
         </div>
       )}
       {featuredCampaigns.length >= 12 && (
-        <Button
-          variant={"outline"}
-          className="body-medium self-center rounded-lg border-2 border-primary px-6 py-3 text-primary hover:bg-white hover:text-primary"
-          asChild
-        >
+        <Button variant={"primary-outlined"} stdHeight stdWidth asChild>
           <Link href={ROUTES.OFFERS_AND_EVENTS}>See all</Link>
         </Button>
       )}

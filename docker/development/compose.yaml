@@ -1,0 +1,8 @@
+services:
+  fyndr-development:
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    image: fyndr-development
+    ports:
+      - "3001:3000"

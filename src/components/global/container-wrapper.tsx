@@ -30,7 +30,7 @@ const ContainerWrapper: React.FC<ContainerWrapperProps> = ({
         >
           {title && (
             <h2
-              className={`title-5 text-primary ${!headerOption ? "mb-8" : ""}`}
+              className={`title-5 text-primary ${!headerOption ? "mb-4" : ""}`}
             >
               {title}
             </h2>

@@ -135,7 +135,7 @@ export const BUSINESS_MENU: SubMenuProps[] = [
       },
       {
         icon: ChartPie,
-        route: "/business/account/offers_summary",
+        route: ROUTES.BUSINESS_ACCOUNT_OFFER_SUMMARY,
         label: "Offer Summary",
       },
       {

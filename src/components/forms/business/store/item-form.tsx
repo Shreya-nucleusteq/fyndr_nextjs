@@ -14,7 +14,7 @@ import { ProcessedFileProps } from "@/lib/utils/files/upload.utils";
 import {
   StoreItem,
   UploadedImageData,
-} from "@/types/api-response/catalogue.response";
+} from "@/types/catalogue/catalogue.types";
 import { useItemStore } from "@/zustand/stores/store-item.store";
 
 import ItemFormContent from "./item-form-content";

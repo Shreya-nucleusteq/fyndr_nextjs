@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { StoreItem } from "@/types/api-response/catalogue.response";
+import { StoreItem } from "@/types/catalogue/catalogue.types";
 
 interface ItemStore {
   items: StoreItem[];

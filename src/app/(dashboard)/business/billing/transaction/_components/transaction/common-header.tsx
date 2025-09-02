@@ -30,7 +30,7 @@ const CommonHeader = ({ type }: Props) => {
           {type === "receivable" ? "Username" : "Offer Name"}
         </div>
         <div className="text-center">Date</div>
-        <div className="text-right">Amount</div>
+        <div className="ml-24">Amount</div>
       </div>
     </>
   );

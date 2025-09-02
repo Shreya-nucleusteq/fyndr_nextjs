@@ -4,7 +4,7 @@ import { GetCountryListParams } from "@/types/api-params/others.params";
 import {
   GetActivePromoProps,
   GetExpiredPromos,
-} from "@/types/api-params/promocode.params";
+} from "@/types/api-params/promo-code.params";
 import { GetUsersParams } from "@/types/api-params/user.params";
 import { ExpiredList } from "@/types/api-response/promocode.response";
 

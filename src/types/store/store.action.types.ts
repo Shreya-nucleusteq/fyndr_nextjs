@@ -5,6 +5,7 @@ import {
   GetLocationOffersParams,
   GetStoreCategoriesParams,
   GetStoreDetailsParams,
+  GetStoreLocationsParams,
   GetStoreParams,
   LikeBusinessParams,
 } from "./store.params";
@@ -14,6 +15,7 @@ import {
   GetLocationOffersResponse,
   GetStoreCategoriesResponse,
   GetStoreDetailsResponse,
+  GetStoreLocationsResponse,
   GetStoreResponse,
   LikeBusinessResponse,
 } from "./store.response";
@@ -32,6 +34,12 @@ export type GetStoreCategories = ({
   params,
 }: GetStoreCategoriesParams) => Promise<
   ActionResponse<GetStoreCategoriesResponse>
+>;
+
+export type GetStoreLocations = ({
+  params,
+}: GetStoreLocationsParams) => Promise<
+  ActionResponse<GetStoreLocationsResponse>
 >;
 
 // ----------------------------------------------------------------------

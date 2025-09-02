@@ -14,7 +14,7 @@ const getDecimalNum = (num: number): string => {
 
 const getDateNew = (date: string, timezone: string): string => {
   const dateObj = new Date(date);
-  return dateObj.toLocaleDateString('en-US', { timeZone: timezone });
+  return dateObj.toLocaleDateString("en-US", { timeZone: timezone });
 };
 
 type Props = {
@@ -155,7 +155,7 @@ const SummaryCard = ({ summarydata }: Props) => {
         </div>
       ) : (
         <div className="flex h-12 items-center justify-center">
-          <span>{`No data available for the Past Months"}.`}</span>
+          <span>{`No data available for the past months`}</span>
         </div>
       )}
     </>

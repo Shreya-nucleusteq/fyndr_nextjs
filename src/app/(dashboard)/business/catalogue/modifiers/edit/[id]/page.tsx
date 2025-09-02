@@ -3,9 +3,9 @@ import ModifierAddForm from "@/components/forms/business/store/modifier-form";
 import ContainerWrapper from "@/components/global/container-wrapper";
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function EditModifier({ params }: Props) {

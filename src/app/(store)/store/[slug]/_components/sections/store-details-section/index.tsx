@@ -1,12 +1,16 @@
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Phone, Globe, Timer } from "lucide-react";
-import Image from "next/image";
+import { Phone, Globe, Timer, MapPin } from "lucide-react";
 import React, { Suspense } from "react";
 
+import BusinessLocationMapModal from "@/app/(listing)/offer-listing/_components/business-location-map-modal";
+import Button from "@/components/global/buttons";
 import DefaultCard from "@/components/global/cards/default-card";
+import PlaceholderImage from "@/components/global/placeholder-image";
 import BusinessRatings from "@/components/global/rating-and-reviews/business/business-rating";
+import BusinessRatingSkeleton from "@/components/global/rating-and-reviews/business/business-ratings-skeleton";
 import WebsiteTo from "@/components/global/website-to";
+import { Skeleton } from "@/components/ui/skeleton";
 import { parseAddress } from "@/lib/utils/address";
 import { GetStoreResponse } from "@/types/store/store.response";
 
@@ -159,7 +163,7 @@ const StoreDetailsSection = ({
   return (
     <DefaultCard className="flex size-full flex-col p-0 sm:max-w-72 lg:min-w-96 lg:max-w-96">
       <div className="flex flex-col gap-4 border-b border-secondary-20 p-4">
-        <Image
+        <PlaceholderImage
           src={businessLogo}
           alt={businessName}
           height={300}
@@ -167,7 +171,9 @@ const StoreDetailsSection = ({
           className="size-32 rounded-full"
         />
         <h2 className="heading-5 text-secondary">{businessName}</h2>
-        <BusinessRatings bizId={bizId} compact className="flex-wrap" />
+        <Suspense fallback={<BusinessRatingSkeleton compact />}>
+          <BusinessRatings bizId={bizId} compact className="flex-wrap" />
+        </Suspense>
       </div>
       <div className="relative flex size-full flex-col">
         <div className="body-2 flex flex-col gap-4 border-b border-secondary-20 p-4 py-8 text-black-50">
@@ -205,14 +211,29 @@ const StoreDetailsSection = ({
           </div>
         )}
 
-        <Suspense fallback={"Loading..."}>
-          <ActiveOffersAndMap
-            locationId={locationId}
-            lat={parentLocation.lat}
-            lng={parentLocation.lng}
-            locQrId={parentLocation.qrid}
-          />
-        </Suspense>
+        <div className="flex flex-col gap-2 p-4 py-8">
+          {locationId && parentLocation.lat && parentLocation.lng && (
+            <BusinessLocationMapModal
+              trigger={
+                <Button variant="primary" stdHeight className="w-full">
+                  <MapPin size={20} /> Get Directions
+                </Button>
+              }
+              address=""
+              id={locationId.toString()}
+              location={{
+                lat: parentLocation.lat,
+                lng: parentLocation.lng,
+              }}
+            />
+          )}
+          <Suspense fallback={<Skeleton className="h-11 w-full !rounded-10" />}>
+            <ActiveOffersAndMap
+              locationId={locationId}
+              locQrId={parentLocation.qrid}
+            />
+          </Suspense>
+        </div>
       </div>
     </DefaultCard>
   );

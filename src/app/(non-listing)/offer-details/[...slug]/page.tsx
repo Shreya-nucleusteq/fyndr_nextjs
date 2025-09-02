@@ -4,6 +4,8 @@ import React from "react";
 import { onGetCampaignByQr } from "@/actions/campaign.action";
 import { auth } from "@/auth";
 import DefaultCard from "@/components/global/cards/default-card";
+import BusinessRatingsAndReviews from "@/components/global/rating-and-reviews/business/business-ratings-and-reviews";
+import RatingAndReviewModal from "@/components/global/rating-and-reviews/business/rating-and-review-modal";
 import { DEFAULT_LOCATION } from "@/constants";
 import { RouteParams } from "@/types/global";
 
@@ -12,8 +14,6 @@ import NearestLocations from "./_components/sections/campaign-info-section/neare
 import DescriptionSection from "./_components/sections/description-section";
 import OfferDetailsMap from "./_components/sections/offer-details-map";
 import OffersSection from "./_components/sections/offers-section";
-import RatingAndReviewsSection from "./_components/sections/rating-and-reviews-section";
-import RatingAndReviewModal from "./_components/sections/rating-and-reviews-section/rating-and-review-modal";
 import TermsAndConditionsSection from "./_components/sections/terms-and-conditions-section";
 
 type Props = {
@@ -96,7 +96,7 @@ const Offer = async ({ params, searchParams }: RouteParams & Props) => {
             <DescriptionSection desc={description} />
             <OfferDetailsMap campaignLocations={campaign.cmpnLocs} />
 
-            <RatingAndReviewsSection
+            <BusinessRatingsAndReviews
               business={campaign.biz}
               orderBy={orderBy as "ASC" | "DESC"}
               sortBy={sortBy as "RATING" | "CREATED_DT"}
@@ -114,7 +114,7 @@ const Offer = async ({ params, searchParams }: RouteParams & Props) => {
         </div>
       </main>
       <RatingAndReviewModal>
-        <RatingAndReviewsSection
+        <BusinessRatingsAndReviews
           business={campaign.biz}
           qrCode={campaign.qrCode}
           orderBy={orderBy as "ASC" | "DESC"}

@@ -83,44 +83,39 @@ const Pagination = ({
   };
 
   const getPageButtons = () => {
-    if (!count || totalPages <= 1) return [];
+    // Always show page 1 button, even if it's the only page
+    if (!count || totalPages <= 1) {
+      return [1];
+    }
 
     const pageButtons = [];
-    const itemsPerSide = 2;
+    const maxDirectButtons = 3;
 
-    // For small number of pages, show all pages
-    if (totalPages <= 5) {
+    // For small number of pages (3 or less), show all pages
+    if (totalPages <= maxDirectButtons) {
       for (let i = 1; i <= totalPages; i++) {
         pageButtons.push(i);
       }
       return pageButtons;
     }
 
-    // Add first page
-    pageButtons.push(1);
-
-    // Calculate left and right boundaries
-    const leftBoundary = Math.max(2, page - itemsPerSide);
-    const rightBoundary = Math.min(totalPages - 1, page + itemsPerSide);
-
-    // Add ellipsis after first page if needed
-    if (leftBoundary > 2) {
-      pageButtons.push("prev-ellipsis");
-    }
-
-    // Add pages around current page
-    for (let i = leftBoundary; i <= rightBoundary; i++) {
-      pageButtons.push(i);
-    }
-
-    // Add ellipsis before last page if needed
-    if (rightBoundary < totalPages - 1) {
+    // For more than 3 pages, always show exactly 3 direct buttons with single ellipsis
+    if (page <= 2) {
+      // Show first 3 pages: 1, 2, 3, ..., last
+      pageButtons.push(1, 2, 3);
       pageButtons.push("next-ellipsis");
-    }
-
-    // Add last page
-    if (totalPages > 1) {
       pageButtons.push(totalPages);
+    } else if (page >= totalPages - 1) {
+      // Show first, ..., last 3 pages: 1, ..., (n-2), (n-1), n
+      pageButtons.push(1);
+      pageButtons.push("prev-ellipsis");
+      pageButtons.push(totalPages - 2, totalPages - 1, totalPages);
+    } else {
+      // Show first, current-1, current, current+1, ..., last
+      // But limit to 3 direct buttons: first, ..., current, current+1, last
+      pageButtons.push(1);
+      pageButtons.push("prev-ellipsis");
+      pageButtons.push(page, page + 1, totalPages);
     }
 
     return pageButtons;

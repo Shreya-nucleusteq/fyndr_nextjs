@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { TabsList, TabsTrigger } from "@radix-ui/react-tabs";
@@ -25,8 +26,6 @@ const Faq = ({ userType }: Props) => {
   const {
     questions: faqQAList,
     refetch,
-    isLoading,
-    isFetching,
   } = useFaqQA(selectedCategoryId, query);
 
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -46,7 +45,7 @@ const Faq = ({ userType }: Props) => {
       id="faq"
       className="w-4/5 scroll-smooth rounded-10 border border-black-10 bg-white px-10 pb-24 shadow-md"
     >
-      <div className="text-black flex flex-col items-center justify-center py-6 text-[24px] font-semibold">
+      <div className="flex flex-col items-center justify-center py-6 text-[24px] font-semibold text-black">
         <h3>Frequently Asked Questions By {userType} (FAQs)</h3>
         <span className="mt-4 text-[16px] font-normal">
           Have question? We’re here to help you.
@@ -69,11 +68,7 @@ const Faq = ({ userType }: Props) => {
                     <TabsTrigger
                       key={cat.id}
                       value={cat.id.toString()}
-                      className="relative mx-4 mt-4 whitespace-nowrap border-b-2
-          border-transparent pb-2 text-[2vw] font-normal text-[#7a8086]
-          data-[state=active]:border-primary data-[state=active]:text-primary sm:text-[2vw]
-          md:text-[2vw]
-          lg:text-[1vw]"
+                      className="relative mx-4 mt-4 whitespace-nowrap border-b-2 border-transparent pb-2 text-[2vw] font-normal text-[#7a8086] data-[state=active]:border-primary data-[state=active]:text-primary sm:text-[2vw] md:text-[2vw] lg:text-[1vw]"
                       onClick={() => setSelectedCategoryId(cat.id)}
                       data-state={
                         selectedCategoryId === cat.id ? "active" : "inactive"

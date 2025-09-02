@@ -10,7 +10,7 @@ import {
   FieldValues,
   DefaultValues,
 } from "react-hook-form";
-import { ZodSchema } from "zod";
+import { ZodType } from "zod";
 
 import { onVerifyCode } from "@/actions/auth.actions";
 import { getPlaceDataWithZipcodeAndCountry } from "@/actions/maps.actions";
@@ -21,6 +21,7 @@ import { useFindUsOptions } from "@/hooks/others";
 import { validatePostalAddress } from "@/lib/utils";
 import { useRegistrationStore } from "@/zustand/stores/registration.store";
 
+// Updated BaseFormData interface to match your schemas
 export interface BaseFormData extends FieldValues {
   email: string;
   firstName: string;
@@ -29,17 +30,20 @@ export interface BaseFormData extends FieldValues {
   ctryCode: string;
   phone: string;
   postalCode: string;
-  addressLine1?: string;
-  addressLine2?: string;
+  addressLine1: string;
+  addressLine2: string;
   city: string;
   state: string;
-  referralCode?: string | null;
-  promoCode?: string | null;
-  findUsId?: number;
+  referralCode: string | null;
+  promoCode: string | null;
+  findUsId: number;
+  lat: number;
+  lng: number;
 }
 
 interface UseBaseRegistrationFormConfig<T extends BaseFormData> {
-  schema: ZodSchema<T>;
+  // Changed from ZodSchema to ZodType for better compatibility
+  schema: ZodType<T, any, any>;
   defaultValues?: DefaultValues<T>;
   onSubmit: (data: T & { isBusiness: boolean }) => void;
   isBusiness: boolean;
@@ -94,8 +98,9 @@ export const useBaseRegistrationForm = <T extends BaseFormData>({
   const [countryId, setCountryId] = useState<number | null>(null);
   const [agreeOnTerms, setAgreeOnTerms] = useState(false);
 
+  // Updated baseDefaults to handle nullable fields properly
   const baseDefaults: DefaultValues<T> = {
-    email: queryEmail || registrationData.email,
+    email: queryEmail || registrationData.email || "",
     firstName: registrationData.firstName || "",
     lastName: registrationData.lastName || "",
     country: registrationData.country || "US",
@@ -109,6 +114,8 @@ export const useBaseRegistrationForm = <T extends BaseFormData>({
     referralCode: registrationData.referralCode || null,
     promoCode: registrationData.promoCode || null,
     findUsId: registrationData.findUsId || 8,
+    lat: registrationData.lat || 0,
+    lng: registrationData.lng || 0,
     ...defaultValues,
   } as DefaultValues<T>;
 

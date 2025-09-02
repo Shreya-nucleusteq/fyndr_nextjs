@@ -145,7 +145,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
         <DialogContent
           ref={ref}
           className={cn(
-            "p-0 gap-0 !rounded-10 max-w-[91vw] sm:max-w-lg",
+            "p-0 gap-0 !rounded-10 max-w-[91vw] sm:max-w-lg relative",
             contentClassName
           )}
           onPointerDownOutside={handleOutsideClick}
@@ -183,7 +183,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
           {shouldShowFooter && (
             <DialogFooter
-              className={`flex flex-col-reverse p-4 sm:flex-row sm:justify-end sm:space-x-2 ${footerClassName}`}
+              className={`flex flex-col-reverse p-4 sm:flex-row sm:justify-end sm:space-x-2 ${footerClassName} relative`}
             >
               {secondaryAction && (
                 <Button

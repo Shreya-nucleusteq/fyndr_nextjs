@@ -16,6 +16,9 @@ body {
 
 @layer utilities {
   /** Typography */
+  .sidebar-wide-collapsed {
+    --sidebar-width-icon: 100px; /* Increase from default 80px to 120px */
+  }
 
   /*? body */
   .body-1 {
@@ -374,6 +377,8 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-width: 320px;
+    --sidebar-width-icon: 100px;
   }
   .dark {
     --sidebar-background: 240 5.9% 10%;

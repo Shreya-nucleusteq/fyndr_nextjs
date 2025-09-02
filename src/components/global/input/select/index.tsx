@@ -132,8 +132,7 @@ const Select = ({
             aria-expanded={open}
             className={cn(
               "w-full justify-between text-left font-normal input-primary",
-              `input-primary border-none shadow-none outline-none ring-0 focus:ring-0 ${inputClassName}`,
-              !currentValue && "text-muted-foreground",
+              `input-primary border-none shadow-none outline-none ring-0 focus:ring-0`,
               inputClassName
             )}
             disabled={disabled}

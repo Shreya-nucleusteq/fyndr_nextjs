@@ -36,16 +36,28 @@ const TimeSlotCard = ({
   const formattedEndTime = formatTime(endTime);
 
   return (
-    <div className="relative">
+    <div
+      className={cn(
+        `relative !rounded-5 body-3`,
+        isSelected
+          ? // ? "!border-indicator-green-90 !bg-indicator-green-90 !text-white hover:!bg-indicator-green-90 hover:!text-white"
+            "!border-custom-green-2nd !text-custom-green-2nd"
+          : "",
+        "disabled:!border-secondary-20 disabled:!bg-secondary-20 disabled:!text-white disabled:hover:!bg-secondary-20 disabled:hover:!text-secondary-20"
+        // className
+      )}
+    >
       <Button
         type="button"
         variant="primary-outlined"
         onClick={onClick}
         className={cn(
+          "w-fit !rounded-10 body-3 py-[8px] px-[10px]",
           isSelected
-            ? "!border-indicator-green-90 !bg-indicator-green-90 !text-white hover:!bg-indicator-green-90 hover:!text-white"
-            : "",
-          "disabled:!border-secondary-20 disabled:!bg-secondary-20 disabled:!text-white disabled:hover:!bg-secondary-20 disabled:hover:!text-secondary-20",
+            ? "!border-custom-green-2nd !bg-custom-green-2nd !text-white hover:!custom-green-2nd hover:!text-white"
+            : // ?  "!border-custom-green-2nd !text-custom-green-2nd"
+              "",
+          "disabled:!border-secondary-20 disabled:!bg-white disabled:!text-secondary-20 disabled:hover:!bg-white disabled:hover:!text-secondary-20",
           className
         )}
         disabled={avlAppointments === 0}
@@ -56,7 +68,7 @@ const TimeSlotCard = ({
         <div
           className={cn(
             "absolute -top-3 -right-3 size-6 rounded-full flex items-center justify-center text-xs font-bold",
-            "rounded-full bg-primary text-white flex-center border-2 border-white"
+            "rounded-full text-white flex-center border-2 border-white bg-primary"
           )}
         >
           {avlAppointments}

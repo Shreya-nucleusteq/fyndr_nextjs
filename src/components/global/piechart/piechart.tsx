@@ -11,36 +11,37 @@ interface ChartData {
 interface PieChartProps {
   chartData: ChartData[];
   colors?: string[];
+  height?: number;
+  width?:number;
 }
 
-const PieChartSection: React.FC<PieChartProps> = ({
-  chartData,
-  colors = ["#5196E2", "#999999", "#EAF2FC"],
-}) => {
-  const [mounted, setMounted] = useState(false);
+const PieChartSection: React.FC<PieChartProps> = ({ chartData, colors = ["#5196E2", "#999999", "#EAF2FC"] ,width = 200 , height =200}) => {
+     const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) return null; 
   return (
-    <PieChart width={250} height={250}>
-      <Pie
-        data={chartData}
-        dataKey="visitors"
-        nameKey="name"
-        cx="50%"
-        cy="50%"
-        outerRadius={70}
-        label
-      >
-        {chartData.map((_, index) => (
-          <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-        ))}
-      </Pie>
-      <Tooltip />
-    </PieChart>
+
+      <PieChart width={width} height={height}>
+        <Pie
+          data={chartData}
+          dataKey="visitors"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          outerRadius={100}
+         
+        >
+          {chartData.map((_, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+          ))}
+        </Pie>
+        <Tooltip />
+      </PieChart>
+   
   );
 };
 

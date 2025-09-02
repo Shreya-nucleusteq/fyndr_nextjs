@@ -1,7 +1,11 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
+import ROUTES from "@/constants/routes";
 import { API_BASE_URL } from "@/environment";
 import { _get, _post, _put } from "@/lib/handlers/fetch";
+import { CreateCampaign } from "@/types/api-params/campaign.params";
 import {
   GetBusinessCampaigns,
   GetCampaignByQr,
@@ -94,6 +98,19 @@ export const onGetLikedCampaigns: GetLikedCampaigns = async ({
     endpoint = `${endpoint}&orderBy=${orderBy}`;
   }
 
+  return _post(endpoint, payload, {
+    requireAuth: true,
+  });
+};
+
+export const onSaveCampaign: CreateCampaign = async (payload) => {
+  const endpoint = `${API_BASE_URL}/campaign/cmpn`;
+  revalidatePath(ROUTES.BUSINESS_CAMPAIGNS);
+  if (payload.objid) {
+    return _put(endpoint, payload, {
+      requireAuth: true,
+    });
+  }
   return _post(endpoint, payload, {
     requireAuth: true,
   });

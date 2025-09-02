@@ -79,6 +79,8 @@ export function getUserDetailsTableColumns({
         return <div>{phone ? `${countryCode}${phone}` : "NA"}</div>;
       },
       enableSorting: false,
+      enableHiding:false,
+  
     },
     {
       id: "registeredOn",

@@ -1,0 +1,8 @@
+services:
+  fyndr-production:
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+    image: fyndr-production
+    ports:
+      - "3003:3000"

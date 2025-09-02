@@ -98,7 +98,7 @@ const SelectLocationModal = ({ locations, campaignId }: Props) => {
             </React.Fragment>
           ))}
         </RadioGroup>
-        <div className="flex-center fixed inset-x-0 bottom-0 rounded-b-10 bg-white p-4 shadow-pagination">
+        <div className="flex-center absolute inset-x-0 bottom-0 rounded-b-10 bg-white p-4 shadow-pagination">
           <Button
             variant="primary"
             stdHeight

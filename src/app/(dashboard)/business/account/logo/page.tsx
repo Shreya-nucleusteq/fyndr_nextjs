@@ -29,7 +29,6 @@ const BusinessLogo = () => {
   if (!user) return null;
   const handleFileUpload = (files: ProcessedFileProps[]) => {
     setUploadedFiles(files);
-    console.log("files", files);
   };
 
   const handleBusinessLogo = async () => {

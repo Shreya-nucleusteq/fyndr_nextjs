@@ -20,7 +20,7 @@ export const useFaqCategories = (entityId: number) => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["faqCategories", entityId],
-    queryFn: () => onGetFaqCategories({ entityId }),
+    queryFn: () => onGetFaqCategories({ params: { entityId } }),
   });
 
   useEffect(() => {
@@ -59,14 +59,17 @@ export const useFaqCategories = (entityId: number) => {
 };
 
 export const useFaqQA = (categoryId: number | null, searchStr = "") => {
-  const { data, isLoading, isError, refetch} = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["faqQA", categoryId, searchStr],
     queryFn: () =>
       onGetFaqQuestions({
-        categoryId: categoryId!,
-        searchStr,
+        params: {
+          categoryId: categoryId!,
+          searchStr,
+        },
       }),
     // refetchOnWindowFocus: false,
+    enabled: !!categoryId,
   });
 
   const questions = data?.success ? data.data : [];
@@ -76,6 +79,5 @@ export const useFaqQA = (categoryId: number | null, searchStr = "") => {
     isLoading,
     isError,
     refetch,
-
   };
 };

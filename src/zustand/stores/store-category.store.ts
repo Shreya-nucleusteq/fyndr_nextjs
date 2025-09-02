@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { StoreCategory } from "@/types/api-response/catalogue.response";
+import { StoreCategory } from "@/types/catalogue/catalogue.types";
 
 interface CategoryStore {
   categories: StoreCategory[];

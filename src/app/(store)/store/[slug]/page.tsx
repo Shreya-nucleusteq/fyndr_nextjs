@@ -1,16 +1,38 @@
 import React from "react";
 
-import { onGetStore } from "@/actions/store.action";
+import { onGetStore, onGetStoreLocations } from "@/actions/store.action";
+import BusinessRatingsAndReviews from "@/components/global/rating-and-reviews/business/business-ratings-and-reviews";
+import RatingAndReviewModal from "@/components/global/rating-and-reviews/business/rating-and-review-modal";
 import ASSETS from "@/constants/assets";
 import { RouteParams } from "@/types/global";
 
+import DefaultDataFiller from "./[biz]/[store]/[category]/_components/helpers/default-data-filler";
 import BannerImageSection from "./_components/sections/banner-image-section";
 import CategorySection from "./_components/sections/category-section";
 import StoreDetailsSection from "./_components/sections/store-details-section";
+import StoreLocationsModal from "./_components/store-locations-modal";
 
 const Store = async ({ searchParams, params }: RouteParams) => {
   const { slug: catalogueUrl } = (await params) as { slug: string };
-  const { location: locationId, query = "" } = await searchParams;
+  const {
+    location: locationId,
+    query = "",
+    sortBy = "RATING",
+    orderBy = "DESC",
+    page = 1,
+  } = await searchParams;
+
+  if (!locationId) {
+    const { success, data } = await onGetStoreLocations({
+      params: {
+        storeUrl: catalogueUrl,
+      },
+    });
+
+    if (!success || !data) return null;
+
+    return <StoreLocationsModal locations={data.locations} />;
+  }
 
   const { success, data: store } = await onGetStore({
     params: {
@@ -60,6 +82,30 @@ const Store = async ({ searchParams, params }: RouteParams) => {
           </div>
         </div>
       </main>
+      <RatingAndReviewModal>
+        <BusinessRatingsAndReviews
+          business={store.biz}
+          qrCode={store.parentLocation.qrid.toString()}
+          orderBy={orderBy as "ASC" | "DESC"}
+          sortBy={sortBy as "RATING" | "CREATED_DT"}
+          page={page !== undefined ? Number(page) : page}
+          showSeeAllComments={false}
+          className="p-0"
+          enableCommentPagination={true}
+          showHeading={false}
+        />
+      </RatingAndReviewModal>
+      <DefaultDataFiller
+        bizId={store.biz.bizid}
+        storeId={store.catalogue.objid}
+        locationId={Number(locationId)}
+        storeUrl={store.catalogue.url}
+        bizName={store.biz.bizName}
+        storeName={store.catalogue.name}
+        appointmentType={store.catalogueAppointmentType}
+        country={store.parentLocation.country}
+        postalCode={store.parentLocation.postalCode}
+      />
     </>
   );
 };

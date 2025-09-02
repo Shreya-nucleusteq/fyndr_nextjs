@@ -19,6 +19,10 @@ import {
   ContactUsResponse,
 } from "@/types/api-response/others.response";
 
+type DeleteLocationPayload = {
+  objid: number;
+  bizid: number;
+};
 export const onGetBackgroundImage: GetBackgroundImageProps = async (params) => {
   const endpoint = `${API_BASE_URL}/identity/background-image?lat=${params.lat}&lng=${params.lng}`;
 
@@ -55,7 +59,14 @@ export const onAddLocation: AddLocationParams = async (payload) => {
   });
 };
 
-export const onDeleteLocation: AddLocationParams = async (payload) => {
+export const onUpdateLocationn: AddLocationParams = async (payload) => {
+  const endpoint = `${API_BASE_URL}/identity/location`;
+  return _put(endpoint, payload, {
+    requireAuth: true,
+  });
+};
+
+export const onDeleteLocation = async (payload: DeleteLocationPayload) => {
   const endpoint = `${API_BASE_URL}/identity/location`;
   return _delete(endpoint, payload, {
     requireAuth: true,

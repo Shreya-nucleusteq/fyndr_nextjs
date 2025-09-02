@@ -23,6 +23,12 @@ export type GetStoreCategoriesParams = {
   };
 };
 
+export type GetStoreLocationsParams = {
+  params: {
+    storeUrl: string;
+  };
+};
+
 // --------------------------------------------------------------------
 
 export type GetBusinessDirectoryParams = {

@@ -8,10 +8,15 @@ const nextConfig: NextConfig = {
   },
   staticPageGenerationTimeout: 300,
   serverExternalPackages: ["pino", "pino-pretty"],
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+  // eslint: { ignoreDuringBuilds: true },
+  // typescript: { ignoreBuildErrors: true },
   images: {
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "biz-logo.s3.us-west-1.amazonaws.com",
+        port: "",
+      },
       { protocol: "https", hostname: "s3.us-west-1.amazonaws.com", port: "" },
       { protocol: "https", hostname: "s3-us-west-1.amazonaws.com", port: "" },
       {
@@ -30,6 +35,7 @@ const nextConfig: NextConfig = {
     ],
   },
   logging: { fetches: { fullUrl: true } },
+  // output: "standalone",
 };
 
 export default nextConfig;

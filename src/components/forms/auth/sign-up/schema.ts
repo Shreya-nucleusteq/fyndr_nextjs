@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 
 export const BaseUserSchema = z.object({
   email: z
@@ -29,18 +29,17 @@ export const BaseUserSchema = z.object({
     .string()
     .min(1, { message: "Zip code is required." })
     .regex(/^\d+$/, { message: "Zip code can only contain digits." }),
-  addressLine1: z.string(),
-  addressLine2: z.string(),
+  addressLine1: z.string().default(""),
+  addressLine2: z.string().default(""),
   city: z.string().min(1, { message: "City is required." }),
   state: z.string().min(1, { message: "State is required." }),
-  referralCode: z.string().nullable(),
-  promoCode: z.string().nullable(),
-  findUsId: z.number(),
-
-  isBusiness: z.boolean(),
-  regMode: z.string(),
-  lat: z.number(),
-  lng: z.number(),
+  referralCode: z.string().nullable().default(null),
+  promoCode: z.string().nullable().default(null),
+  findUsId: z.number().default(8),
+  lat: z.number().default(0),
+  lng: z.number().default(0),
+  isBusiness: z.boolean().default(false),
+  regMode: z.string().default("classic"),
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters long." })
@@ -57,22 +56,39 @@ export const BaseUserSchema = z.object({
     }),
 });
 
+// Individual Form Schema
 export const IndividualFormSchema = BaseUserSchema.omit({
   password: true,
   regMode: true,
   isBusiness: true,
 }).extend({
   yob: z
-    .string()
-    .transform((val) => (val === "" ? null : val))
-    .nullable()
-    .refine((val) => val === null || (val.length === 4 && /^\d+$/.test(val)), {
-      message: "Year of birth must be exactly 4 digits",
+    .union([z.string(), z.null()])
+    .transform((val) => {
+      if (val === null || val === "" || val === undefined) return null;
+      return val;
     })
+    .nullable()
+    .refine(
+      (val) =>
+        val === null ||
+        (typeof val === "string" && val.length === 4 && /^\d+$/.test(val)),
+      {
+        message: "Year of birth must be exactly 4 digits",
+      }
+    )
     .default(null),
-  gender: z.enum(["M", "F", "ND", "OT"]).nullable().default(null),
+  gender: z
+    .union([z.enum(["M", "F", "ND", "OT"]), z.null(), z.undefined()])
+    .transform((val) => {
+      if (val === undefined) return null;
+      return val;
+    })
+    .nullable()
+    .default(null),
 });
 
+// Business Form Schema
 export const BusinessFormSchema = BaseUserSchema.omit({
   password: true,
   regMode: true,
@@ -82,6 +98,7 @@ export const BusinessFormSchema = BaseUserSchema.omit({
   bizType: z.string().min(1, "Business type is required"),
   website: z
     .string()
+    .transform((val) => val || "")
     .refine((val) => val === "" || z.string().url().safeParse(val).success, {
       message: "Please enter a valid URL or leave empty",
     })
@@ -91,6 +108,7 @@ export const BusinessFormSchema = BaseUserSchema.omit({
   addressLine1: z.string().min(1, { message: "Business address is required." }),
 });
 
+// Type exports
 export type IndividualFormData = z.infer<typeof IndividualFormSchema>;
 export type BusinessFormData = z.infer<typeof BusinessFormSchema>;
 export type FormData = IndividualFormData | BusinessFormData;

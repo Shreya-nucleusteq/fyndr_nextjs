@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 
 import DefaultCard from "@/components/global/cards/default-card";
 import BusinessRatings from "@/components/global/rating-and-reviews/business/business-rating";
+import BusinessRatingSkeleton from "@/components/global/rating-and-reviews/business/business-ratings-skeleton";
 import { Separator } from "@/components/ui/separator";
 import { Campaign } from "@/types/campaign/campaign.types";
 
@@ -32,7 +33,7 @@ const CampaignInfoSection = ({ campaign }: Props) => {
       <CampaignCarousel images={campaignImages} />
       <div className="flex flex-col gap-4 p-4">
         <h1 className="heading-5 text-secondary">{bizName}</h1>
-        <Suspense fallback="Loading...">
+        <Suspense fallback={<BusinessRatingSkeleton compact />}>
           <BusinessRatings bizId={campaign.biz.bizid} compact />
         </Suspense>
         {isFeatured && (

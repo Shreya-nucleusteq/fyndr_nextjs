@@ -83,7 +83,7 @@ export type ChannelOffer =
   | "cmpn_promo"
   | "promo";
 
-export const getChannelName = (channel: ChannelOffer): string => {
+export const getChannelName = (channel: ChannelOffer | string): string => {
   switch (channel) {
     case "offers":
     case "offer_appointment":
@@ -124,6 +124,7 @@ export const statusList = [
 ];
 
 export const getDisplayStatus = (status: Status): string => {
+
   try {
     if (status === "unused") return "Unused";
     return statusList.find((row) => row.value === status)?.display || "";
@@ -136,7 +137,7 @@ export const getFormattedDtNew = (tm: string, timeZone: string): string => {
   return dayjs.tz(tm, timeZone).utc().format("MMMM DD, YYYY");
 };
 
-export const getchannelBought = (channel: ChannelOffer): string => {
+export const getchannelBought = (channel: ChannelOffer | string): string => {
   switch (channel) {
     case "offers":
     case "offer_appointment":

@@ -10,8 +10,8 @@ import { useFetchStoreLocation } from "@/hooks/catalogues/use-store-location";
 import { useUpdateStoreURL } from "@/hooks/catalogues/use-update-store-urls";
 import {
   CatalogueItem,
-  storeLocations,
-} from "@/types/api-response/catalogue.response";
+  StoreLocations,
+} from "@/types/catalogue/catalogue.types";
 
 import List from "../../../_components/list";
 import ListItem from "../../_components/list-Item";
@@ -26,7 +26,7 @@ const Catalogue = ({ data }: Props) => {
   const [selectedCatalogues, setSelectedCatalogues] = useState<CatalogueItem>();
   const [catalogueId, setCatalogueId] = useState<number>(0);
   const [fetchLocation, setFetchLocation] = useState<boolean>(false);
-  const [locations, setLocations] = useState<storeLocations[]>([]);
+  const [locations, setLocations] = useState<StoreLocations[]>([]);
   const [value, setValue] = useState<string>("");
 
   const router = useRouter();

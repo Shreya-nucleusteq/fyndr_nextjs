@@ -31,7 +31,8 @@ export const OptionIcon: React.FC<OptionIconProps> = ({
   if (React.isValidElement(icon)) {
     return (
       <span className={cn("shrink-0 size-4", className)}>
-        {React.cloneElement(icon, { size: 16 })}
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {React.cloneElement(icon as React.ReactElement<any>, { size: 16 })}
       </span>
     );
   }

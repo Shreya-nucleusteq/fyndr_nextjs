@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import Link from "next/link";
@@ -16,16 +15,11 @@ import { useUser } from "@/hooks/auth";
 import { cn } from "@/lib/utils";
 import { ProcessedFileProps } from "@/lib/utils/files/upload.utils";
 
-export const Qr = () => {
+const QrLogoPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState<ProcessedFileProps[]>([]);
   const [checked, setChecked] = useState(false);
   const [extension, setExtension] = useState("");
-  const { user } = useUser();
-  if (!user) return null;
-
-  useEffect(() => {
-    console.log("user?.qrLogo:", user?.qrLogo);
-  }, [user]);
+  const { user, isLoading } = useUser();
 
   useEffect(() => {
     if (uploadedFiles.length > 0) {
@@ -35,6 +29,11 @@ export const Qr = () => {
     }
     console.log("uploadedFiles", uploadedFiles, user?.qrLogo);
   }, [uploadedFiles]);
+
+  if (isLoading) return <div>Loading...</div>;
+
+  if (!user) return null;
+
   const handleFileUpload = (files: ProcessedFileProps[]) => {
     setUploadedFiles(files);
     console.log("files", files);
@@ -128,4 +127,4 @@ export const Qr = () => {
     </ContainerWrapper>
   );
 };
-export default Qr;
+export default QrLogoPage;

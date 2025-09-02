@@ -62,8 +62,6 @@ export const onSignOut: SignOut = async () => {
 };
 
 export const onConfirmIdentity: ConfirmIdentity = async ({ payload }) => {
-  console.log("ConfirmIdentity -> ", payload);
-
   const endpoint = `${API_BASE_URL}/identity/confirmIdentity`;
   return _post(endpoint, payload);
 };
@@ -256,5 +254,6 @@ export const onGoogleOAuth = async ({
     accountStatus: user?.accountStatus,
     accessToken: generateTokenResponse.data?.accessCode,
     refreshToken: generateTokenResponse.data?.refreshToken,
+    bizid: user?.bizid,
   };
 };

@@ -1,7 +1,7 @@
 import { Copy } from "lucide-react";
-import Image from "next/image";
 import React from "react";
 
+import PlaceholderImage from "@/components/global/placeholder-image";
 import { cn } from "@/lib/utils";
 
 import CopyUrl from "../../copy-url";
@@ -15,12 +15,12 @@ type Props = {
 const BannerImageSection = ({ imgURL, alt, className }: Props) => {
   return (
     <div className={cn(`relative`, className)}>
-      <Image
+      <PlaceholderImage
         src={imgURL}
         alt={alt}
         height={500}
         width={500}
-        className="w-full rounded-10"
+        className="max-h-[40rem] w-full rounded-10"
       />
       <div className="absolute right-4 top-4">
         <CopyUrl>

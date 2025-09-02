@@ -34,7 +34,7 @@ const OfferBasicDetails = ({ form }: Props) => {
 
       <FormField
         control={form.control}
-        name="voucher"
+        name="isVoucher"
         render={() => (
           <FormItem className="flex flex-row items-center gap-4">
             <div className="flex w-full flex-col gap-1">

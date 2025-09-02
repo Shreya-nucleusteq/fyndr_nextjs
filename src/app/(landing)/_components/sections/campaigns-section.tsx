@@ -3,7 +3,7 @@ import React from "react";
 
 import { onGetCampaigns } from "@/actions/campaign.action";
 import { auth } from "@/auth";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/global/buttons";
 import { DEFAULT_LOCATION } from "@/constants";
 import ROUTES from "@/constants/routes";
 import {
@@ -91,7 +91,9 @@ const CampaignsSection = async ({ location: { lat, lng } }: Props) => {
           href={`${ROUTES.OFFERS_AND_EVENTS}?types=OFFERS`}
           className="flex w-full justify-center"
         >
-          <Button className="btn-primary-outlined">See all offers</Button>
+          <Button variant="primary-outlined" stdHeight stdWidth>
+            See all offers
+          </Button>
         </Link>
       )}
 
@@ -102,7 +104,9 @@ const CampaignsSection = async ({ location: { lat, lng } }: Props) => {
           href={`${ROUTES.OFFERS_AND_EVENTS}?types=EVENTS`}
           className="flex w-full justify-center"
         >
-          <Button className="btn-primary-outlined">See all events</Button>
+          <Button variant="primary-outlined" stdHeight stdWidth>
+            See all events
+          </Button>
         </Link>
       )}
     </>

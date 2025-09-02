@@ -7,13 +7,13 @@ import { Info } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
+import WebsiteTo from "./website-to";
 import { Button } from "../ui/button";
-import ExternalLinkConfirm from "../ui/externallinkconfirms";
 
 type BizInfoProps = {
-  label?: string; // for address or plain text
-  link?: string; // for clickable link
-  icon: React.ReactNode; // for any JSX icon component (e.g., Image, svg, etc.)
+  label?: string; 
+  link?: string; 
+  icon: React.ReactNode; 
   phone?: number;
   showInfo?: boolean;
   showStore?: boolean;
@@ -28,12 +28,16 @@ const BizInfo: React.FC<BizInfoProps> = ({
   showStore,
 }) => {
   return (
-    <div className="mb-3 max-w-[96%]">
+    <div className="max-w-[96%]">
       <div className="flex justify-between">
-        <div className="mt-2 flex">
+        <div className="mt-2 flex gap-1">
           <span>{icon}</span>
-          {link !== null && link !== undefined && (
-            <ExternalLinkConfirm link={link} />
+          {link && (
+            <WebsiteTo url={`https://${link}`}>
+              <span className="inline-block max-w-full cursor-pointer break-words text-start text-blue-500 underline">
+                {link}
+              </span>
+            </WebsiteTo>
           )}
           {/* {phone !== undefined && isMobile() ? (
               <text onClick={() => callback(true)}>{phone}</text>
@@ -48,7 +52,7 @@ const BizInfo: React.FC<BizInfoProps> = ({
           {showInfo && (
             <Popover>
               <PopoverTrigger asChild>
-                <span className="ml-2 cursor-pointer text-blue-600">
+                <span className="ml-2 cursor-pointer text-primary">
                   <Info className="size-4" />
                 </span>
               </PopoverTrigger>

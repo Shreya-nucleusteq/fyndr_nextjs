@@ -3,15 +3,15 @@ import React from "react";
 
 import StarRating from "@/components/global/ratings/star-rating";
 import { Comment } from "@/types/business/business.types";
-import { Campaign } from "@/types/campaign/campaign.types";
 
 import Metric from "./metric";
 import ReplyCard from "./reply-card";
 import ReplyReportSection from "./reply-report-section";
+import { ReviewBusinessProps } from "../business-ratings-and-reviews";
 
 type Props = {
   comment: Comment;
-  business: Campaign["biz"];
+  business: ReviewBusinessProps;
   qrCode: string;
 };
 

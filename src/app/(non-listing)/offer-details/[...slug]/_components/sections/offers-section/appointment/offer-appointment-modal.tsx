@@ -6,6 +6,7 @@ import { onGetGooglePermission } from "@/actions/auth.actions";
 import SlotBooking from "@/components/global/appointment/slot-booking";
 import { Modal } from "@/components/global/modal";
 import toast from "@/components/global/toast";
+import { formatDate } from "@/lib/utils/date";
 import { AppointmentSlot } from "@/types/appointment/appointment.types";
 import { Campaign } from "@/types/campaign/campaign.types";
 import { OfferCartAppointmentSlot } from "@/types/zustand/offer-cart-store.types";
@@ -66,8 +67,7 @@ const OfferAppointmentModal = ({ campaignId, campaignLocations }: Props) => {
       const cartItem = getCartItem(selectedOfferId);
       if (!cartItem?.appointments) return slots;
 
-      // Filter appointments for the selected date and location
-      const dateStr = selectedDate.toISOString().split("T")[0];
+      const dateStr = formatDate(selectedDate, "yyyy-MM-dd");
       let relevantAppointments = cartItem.appointments.filter((apt) => {
         // Check if this appointment has the specific date key
         const appointmentDetails = apt[dateStr];
@@ -251,10 +251,11 @@ const OfferAppointmentModal = ({ campaignId, campaignLocations }: Props) => {
         closeOnOutsideClick={false}
         onCloseIconClick={handleCancel}
         contentClassName="!max-w-screen-xl"
+        bodyClassName="!p-0"
       >
-        <div className="no-scrollbar relative max-h-[80vh] overflow-y-scroll">
+        <div className="no-scrollbar relative ">
           <SlotBooking
-            title={`Appointment booking for ${offerName}`}
+            title={`Appointment booking for: ${offerName}`}
             objId={selectedOfferId}
             onNext={handleNext}
             onLocationChange={handleLocationChange}
@@ -273,6 +274,7 @@ const OfferAppointmentModal = ({ campaignId, campaignLocations }: Props) => {
                 <></>
               )
             }
+            className="border-none"
           />
         </div>
       </Modal>

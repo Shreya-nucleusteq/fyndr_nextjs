@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
+import { formatDate } from "@/lib/utils/date";
 import {
   OfferCartAppointmentSlot,
   OfferCartStore,
@@ -253,7 +254,8 @@ export const useOfferCartStore = create<OfferCartStore>()(
 
         if (mode === "schedule-later") {
           if (pendingAction) {
-            const date = new Date().toISOString().split("T")[0];
+            // const date = new Date().toISOString().split("T")[0];
+            const date = formatDate(new Date(), "yyyy-MM-dd");
 
             const scheduleForLaterObj: OfferCartAppointmentSlot = {
               [date]: {

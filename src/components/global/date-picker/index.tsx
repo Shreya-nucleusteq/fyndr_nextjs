@@ -18,6 +18,7 @@ interface DatePickerProps {
   onChange: (date: Date | undefined) => void;
   placeholder?: string;
   className?: string;
+  minDate?: Date;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -26,6 +27,17 @@ const DatePicker: React.FC<DatePickerProps> = ({
   placeholder = "Pick a date",
   className,
 }) => {
+
+   const handleDateChange = (date: Date | undefined) => {
+    if (date) {
+      const fixedDate = new Date(date);
+      fixedDate.setHours(12, 0, 0, 0); 
+      onChange(fixedDate);
+    } else {
+      onChange(undefined);
+    }
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -45,7 +57,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         <Calendar
           mode="single"
           selected={value}
-          onSelect={onChange}
+          onSelect={handleDateChange}
           initialFocus
         />
       </PopoverContent>

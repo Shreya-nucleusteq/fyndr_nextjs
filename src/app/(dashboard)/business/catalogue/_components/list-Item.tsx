@@ -117,9 +117,8 @@ const ListItem: React.FC<ListItemProps> = ({
           onClick: () => setVisible(false),
           variant: "outline",
         }}
-        description={"Are you sure you want to proceed ?"}
       >
-        {" "}
+        {"Are you sure you want to proceed ?"}
         <></>
       </Modal>
     </>

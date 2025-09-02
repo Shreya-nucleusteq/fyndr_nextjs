@@ -1,5 +1,7 @@
 // Store -----------------------------------------------
 
+import { CountryCode } from "../global";
+
 export type StoreImageProps = {
   img_url: string;
   index: number;
@@ -62,6 +64,36 @@ export type StoreCategory2 = {
   name: string;
   description: string;
   totalItems: number;
+};
+
+export type StoreLocation = {
+  objid: number;
+  qrid: number;
+  bizid: number;
+  locName: string;
+  phone: string;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  state: string;
+  country: string;
+  postalCode: string;
+  lat: number;
+  lng: number;
+  createdDt: null | string;
+  updatedDt: null | string;
+  ctryCode: CountryCode;
+  status: "active" | string;
+  locType: null | unknown;
+  parentLocation: null | unknown;
+  deliveryWithin: null | unknown;
+  deliveryOptions: string;
+  timeZone: string;
+  workingHours: string;
+  distance?: null | number;
+  catalogueId: null | unknown;
+  biz: null | unknown;
+  workingHoursAndSlots: null | unknown;
 };
 
 // ------------------------------------------------------

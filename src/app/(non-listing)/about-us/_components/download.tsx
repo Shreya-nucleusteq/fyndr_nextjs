@@ -64,19 +64,22 @@ const Download = () => {
                   width={30}
                   height={30}
                 />
-                <span className="text-xl font-normal text-primary underline">
+                <span className="title-5  text-primary underline">
                   Save Big
                 </span>
               </div>
-              <span className="text-base font-normal text-gray-700">
-                Save up to 70% on local services, events, and activities with
-                exclusive offers and discounts.
-              </span>
-              <div className="mt-4 flex flex-col gap-2 text-black-80">
-                <span className="">• Amazing Deals</span>
-                <span className="">• Effortless Bookings</span>
-                <span className="">• Discover Events</span>
-                <span className="">• Personalized Experience</span>
+              <div className="body-1 ml-10">
+                <span className="text-base font-normal text-gray-700">
+                  Save up to 70% on local services, events, and activities with
+                  exclusive offers and discounts.
+                </span>
+                <div className="title-6 mt-4 flex flex-col gap-10 text-[#7F7F7F]">
+                  <span className="">Amazing Deals</span>
+                  <span className="">Effortless Bookings</span>
+                  <span className="">Discover Events</span>
+                  <span className="">Easy Navigation</span>
+                  <span className="">Personalized Experience</span>
+                </div>
               </div>
             </div>
 

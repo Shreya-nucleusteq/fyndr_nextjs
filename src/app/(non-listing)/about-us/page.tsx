@@ -1,15 +1,18 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import { SITE_ABOUT } from "@/constants/site";
 
-import AboutRow from "./_components/AboutRow";
-import AboutUsTab from "./_components/AboutUsTab";
-import FeatureCard from "./_components/featurecards";
+import AboutRow from "./_components/about-row";
+import AboutUsTab from "./_components/about-us-tab";
+import FeatureCard from "./_components/feature-cards";
 
 const AboutUs = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <main className="scroll-smooth">
-      <section className="group relative flex flex-col items-center justify-center gap-4 p-4 md:flex-row">
+      <section className="relative flex flex-col items-center justify-center gap-4 p-4 md:flex-row">
         {SITE_ABOUT.features.map((feature, index) => (
           <FeatureCard
             key={feature.title}
@@ -17,7 +20,9 @@ const AboutUs = () => {
             imgURL={feature.imgURL}
             description={feature.description}
             index={index}
-            className={index === 0 ? "peer" : ""}
+            isFirst={index === 0}
+            hoveredIndex={hoveredIndex}
+            setHoveredIndex={setHoveredIndex}
           />
         ))}
       </section>
@@ -34,9 +39,7 @@ const AboutUs = () => {
         ))}
       </section>
       <section className="bg-white pt-5 ">
-        <h1 className="text-center text-[1.5rem] font-semibold  leading-[42px]">
-          How to use Fyndr:
-        </h1>
+        <h1 className="title-2 text-center">Joining as a ?</h1>
         <AboutUsTab />
       </section>
     </main>

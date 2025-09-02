@@ -55,6 +55,40 @@ export default {
           // DEFAULT: "#D1D1D1",
           DEFAULT: "#B3B3B3",
         },
+        custom: {
+          green: {
+            DEFAULT: "#32871E",
+            "2": "#5AA847",
+            "2nd": "#50B85A",
+            "3": "#78C366",
+            "4": "#9EDB90",
+            "5": "#BCE8B1",
+            "6": "#CFF1C7",
+            "7": "#E6FEE0",
+            "card-bg": "#F0FEED",
+            bg: "#F5FEF3",
+          },
+          red: {
+            DEFAULT: "#ED0C10",
+            "2": "#FF4144",
+            "3": "#FF6F71",
+            "4": "#FA8D8F",
+            "5": "#FFB8B9",
+            "6": "#FFE2E3",
+            "7": "#FFF6F6",
+            bg: "#FFFBFB",
+          },
+          yellow: {
+            DEFAULT: "#FFC700",
+            "6": "#FFDD66",
+            "50": "#FFE27F",
+            "25": "#FFF1BF",
+            "7": "#FFFAE8",
+            "card-bg": "#FFFAE8BF",
+            bg: "#FFFDF6",
+            orange: "#FFFBFB",
+          },
+        },
         indicator: {
           green: {
             "90": "#008B0E",
@@ -92,6 +126,9 @@ export default {
       boxShadow: {
         pagination: "0px -4px 11px 0px #0000000D",
         card: "0px 4px 4px 0px #0000001A",
+        row: "0px 4px 4px 0px #00000014",
+        right: "4px 0px 4px 0px #00000014",
+        top: "0px -4px 4px 0px #0000001A",
         switchUnchecked:
           "-5px 0px 4px 0px #00000040 inset, 4px 0px 4px 0px #FFFFFF0F inset",
         switchChecked:
@@ -100,6 +137,8 @@ export default {
       backgroundImage: {
         "offer-gradient":
           "linear-gradient(90deg, rgb(255, 218, 220) 0%, rgb(255, 255, 255) 100%, rgb(255, 255, 255) 100.01%)",
+        "status-green": "radial-gradient(#0bac18 60%, #0bac18 40%)",
+        "status-red": "radial-gradient(#ff2b27 60%, #ac0b0b 40%)",
       },
       screens: {
         xs: "420px",

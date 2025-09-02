@@ -3,7 +3,10 @@ import React from "react";
 import DefaultCard from "@/components/global/cards/default-card";
 import LocalSearch from "@/components/global/search/local-search";
 import ROUTES from "@/constants/routes";
-import { GetStoreDetailsResponse } from "@/types/store/store.response";
+import {
+  GetStoreDetailsResponse,
+  GetStoreResponse,
+} from "@/types/store/store.response";
 
 import StoreItemCard from "./store-item-card";
 
@@ -16,6 +19,10 @@ type Props = {
   categoryId: number;
   locationId: number;
   query: string;
+  appointmentType: GetStoreResponse["catalogueAppointmentType"];
+  bookingEnabled: GetStoreResponse["catalogBookingEnabled"];
+  country: string;
+  postalCode: string;
 };
 
 const StoreItemSection = ({
@@ -26,6 +33,10 @@ const StoreItemSection = ({
   storeId,
   storeUrl,
   query,
+  appointmentType,
+  bookingEnabled,
+  country,
+  postalCode,
 }: Props) => {
   const filteredItems = storeItems.filter((item) => {
     if (!query || query.trim() === "") {
@@ -59,7 +70,14 @@ const StoreItemSection = ({
         {filteredItems.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {filteredItems.map((storeItem) => (
-              <StoreItemCard key={storeItem.objid} storeItem={storeItem} />
+              <StoreItemCard
+                key={storeItem.objid}
+                storeItem={storeItem}
+                appointmentType={appointmentType}
+                bookingEnabled={bookingEnabled}
+                country={country}
+                postalCode={postalCode}
+              />
             ))}
           </div>
         ) : (

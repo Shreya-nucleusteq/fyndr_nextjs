@@ -2,10 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 
 import { onGetStoreLocations } from "@/actions/catalogue.actions";
 import toast from "@/components/global/toast";
-import { fetchLocationResponse } from "@/types/api-response/catalogue.response";
+import { FetchLocationResponse } from "@/types/catalogue/catalogue.response";
 
 export const useFetchStoreLocation = (
-  onSuccessCallback?: (data: fetchLocationResponse) => void
+  onSuccessCallback?: (data: FetchLocationResponse) => void
 ) => {
   return useMutation({
     mutationFn: onGetStoreLocations,
@@ -20,7 +20,11 @@ export const useFetchStoreLocation = (
     },
     onError: () => {
       toast.error({
-        message: "Could not fetch the store locations.",
+
+        message: "Something went wrong",
+        description: "Could not fetch the store locations.",
+       
+
       });
     },
   });

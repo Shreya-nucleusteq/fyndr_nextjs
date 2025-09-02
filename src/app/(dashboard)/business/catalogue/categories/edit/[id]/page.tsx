@@ -3,9 +3,9 @@ import CategoryAddForm from "@/components/forms/business/store/category-form";
 import ContainerWrapper from "@/components/global/container-wrapper";
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function EditCategory({ params }: Props) {

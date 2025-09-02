@@ -15,7 +15,7 @@ const CatalogModifiers = async () => {
 
   return (
     <ContainerWrapper title="Modifiers" headerOption={<AddModifier />}>
-      <ModifierList modifiers={data.modifiers} bizid={bizid} />
+      <ModifierList modifiers={data?.modifiers || []} bizid={bizid} />
     </ContainerWrapper>
   );
 };

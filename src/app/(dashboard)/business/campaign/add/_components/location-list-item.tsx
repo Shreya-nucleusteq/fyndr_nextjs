@@ -28,7 +28,9 @@ const LocationListItem: React.FC<LocationCardProps> = ({
           onChange?.(isChecked, item);
         }}
       />
-      <span className="font-roboto text-sm font-normal">{item.locName}</span>
+      <span className="font-roboto text-sm font-normal text-black">
+        {item.locName}
+      </span>
     </div>
   );
 };

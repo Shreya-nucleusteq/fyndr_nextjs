@@ -52,6 +52,8 @@ export type CampaignOffer = {
   isBookingEnabled: boolean;
   isVoucher: boolean;
   stdTax: boolean;
+  isNew?: boolean;
+  isUpdated?: boolean;
 
   offerLimit: number | null;
   offerPrice: number;
@@ -66,14 +68,14 @@ export type CampaignOffer = {
   status: OfferStatus;
   voucherFileName: string | null;
   validityPeriod: string;
-  campaignOfferStatus: string;
+  campaignOfferStatus?: string;
   couponCode: string | null;
   currency: Currency;
   currencySymbol: CurrencySymbol;
   discountType: DiscountType;
   displayOrder: number;
-  imageFilePath: string | null;
-  thumbnailFilePath: string | null;
+  imageFilePath?: string | null;
+  thumbnailFilePath?: string | null;
 };
 
 export type CampaignLocation = {
@@ -148,4 +150,36 @@ export type Campaign = {
 
   likedCount: number;
   campaignLiked: boolean;
+};
+
+export type CreateCampaignImage = {
+  index: number;
+  img: string;
+  thumbnail: string;
+};
+
+export type CreateCampaignPayload = {
+  bizid: number;
+  brochureFile: null | unknown;
+  campaignStatus: CampaignStatusProps;
+  campaignVideo: null | unknown;
+  categoryId: number;
+  cmpnImgs: CreateCampaignImage[];
+  cmpnLocs: number[];
+  cmpnType: CampaignTypeProps;
+  cmpnUrl: string | null;
+  country: string;
+  dc: string;
+  descr: string;
+  startDt: string;
+  endDt: string;
+  createdDt: string;
+  lastUpdatedBy: number;
+  status: CampaignStatusProps2;
+  tags: string | null;
+  title: string;
+  offers: CampaignOffer[];
+  objid?: number;
+  goal: string;
+  finePrint: string;
 };

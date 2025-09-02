@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -5,6 +6,7 @@ import { onGetCategories } from "@/actions/category.action";
 import DefaultCard from "@/components/global/cards/default-card";
 import Select from "@/components/global/input/select/index";
 import InfoTooltip from "@/components/global/tooltip/info-tooltip";
+import { useCampaignStore } from "@/zustand/stores/campaign.store";
 
 type CategoryOption = {
   value: string;
@@ -12,9 +14,8 @@ type CategoryOption = {
 };
 
 const ObjectiveCategory = () => {
+  const { campaignPayload, updateCampaignPayload } = useCampaignStore();
   const [categoryList, setCategoryList] = useState<CategoryOption[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedTags] = useState([]);
   const info = (
     <>
       You can manage tags from your profile section.{" "}
@@ -24,12 +25,9 @@ const ObjectiveCategory = () => {
     </>
   );
   const CampaignGoal = [
-    { label: "Maximize In-Store Sales", value: "Maximize In-Store Sales" },
-    { label: "Maximize Online Sales", value: "Maximize Online Sales" },
-    {
-      label: "Maximize In-Store & Online Sales",
-      value: "Maximize In-Store & Online Sales",
-    },
+    { label: "Maximize Local Sales", value: "instore" },
+    { label: "Maximize Nationwide Sales", value: "online" },
+    { label: "Maximize Local & Nationwide Sales", value: "all" },
   ];
 
   const fetchCampaign = async () => {
@@ -47,7 +45,7 @@ const ObjectiveCategory = () => {
   }, []);
   return (
     <>
-      <DefaultCard className="flex-center m-4 min-h-[134px] w-full max-w-[772px] flex-col border-solid bg-white p-[23px] outline-black">
+      <DefaultCard className="flex-center m-4 min-h-[134px] w-full max-w-[772px] flex-col  border border-black-20 bg-white p-[23px]">
         <div className="flex flex-col gap-4">
           <div className="flex flex-row gap-6">
             <Select
@@ -55,6 +53,8 @@ const ObjectiveCategory = () => {
               showRequired
               placeholder=""
               options={CampaignGoal}
+              value={campaignPayload.goal?.toString()}
+              onValueChange={(val) => updateCampaignPayload("goal", val)}
               className="flex w-[350px] flex-row"
             />
             <Select
@@ -62,8 +62,10 @@ const ObjectiveCategory = () => {
               showRequired
               placeholder=""
               options={categoryList}
-              value={selectedCategory}
-              onValueChange={setSelectedCategory}
+              value={campaignPayload.categoryId?.toString()}
+              onValueChange={(val) =>
+                updateCampaignPayload("categoryId", Number(val))
+              }
               className="flex w-[350px] flex-row"
             />
           </div>
@@ -75,8 +77,8 @@ const ObjectiveCategory = () => {
               <Select
                 options={[]}
                 placeholder=""
-                value={selectedTags}
-                // onValueChange={setSelectedTags}
+                // value={campaignPayload.tags?.toString() ?? ""}
+                // onValueChange={(val) => updateCampaignPayload("tags", val)}
                 inputClassName="hover:bg-white"
                 multi
               />

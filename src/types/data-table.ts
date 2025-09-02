@@ -30,7 +30,7 @@ export interface ExtendedColumnFilter<TData> extends FilterItemSchema {
 
 export interface DataTableRowAction<TData> {
   row: Row<TData>;
-  variant: "update" | "delete";
+  variant: "update" | "delete" | "print";
 }
 
 declare module "@tanstack/react-table" {

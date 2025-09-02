@@ -8,6 +8,7 @@ import {
   StoreCategory,
   StoreCategory2,
   StoreImageProps,
+  StoreLocation,
 } from "./store.types";
 
 // Store --------------------------------------------------------
@@ -25,6 +26,7 @@ export type GetStoreResponse = {
     country: string;
     expressMerchantId: string;
     lat: number;
+    lng: number;
     mainLogo: string;
     merchantId: string;
     phone: string;
@@ -82,7 +84,10 @@ export type GetStoreResponse = {
     url: string;
   };
   businessWorkingHours: BusinessWorkingHour;
-  catalogueAppointmentType: "APPOINTMENT_PER_ITEM" | string;
+  catalogueAppointmentType:
+    | "APPOINTMENT_PER_ITEM"
+    | "APPOINTMENT_PER_CART"
+    | null;
   catalogBookingEnabled: boolean;
 };
 
@@ -99,6 +104,30 @@ export type GetStoreDetailsResponse = {
 };
 
 export type GetStoreCategoriesResponse = StoreCategory2[];
+export type GetStoreLocationsResponse = {
+  biz: {
+    addonUrl: null | string;
+    addressLine1: string;
+    addressLine2: string;
+    bizid: number;
+    bizName: string;
+    bizType: string;
+    city: string;
+    country: string;
+    expressMerchantId: string;
+    lat: number;
+    lng: number;
+    mainLogo: string;
+    merchantId: string;
+    phone: string;
+    postalCode: string;
+    state: string;
+    showBiz: boolean;
+    stripeAccountType: StripeAccountType;
+    website: string;
+  };
+  locations: StoreLocation[];
+};
 
 // --------------------------------------------------------
 

@@ -27,10 +27,11 @@ import { ProcessedFileProps } from "@/lib/utils/files/upload.utils";
 import {
   StoreModifier,
   UploadedImageData,
-} from "@/types/api-response/catalogue.response";
+} from "@/types/catalogue/catalogue.types";
 import { useModifierStore } from "@/zustand/stores/store-modifier.store";
 
 import { modifierSchema } from "./schema";
+
 type ModifierFormValues = z.infer<typeof modifierSchema>;
 const defaultValues: ModifierFormValues = {
   modName: "",

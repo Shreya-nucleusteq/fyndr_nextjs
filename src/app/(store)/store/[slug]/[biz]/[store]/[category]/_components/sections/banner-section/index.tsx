@@ -1,11 +1,12 @@
 import { Copy } from "lucide-react";
-import Image from "next/image";
 import React, { Suspense } from "react";
 
 import CopyUrl from "@/app/(store)/store/[slug]/_components/copy-url";
+import PlaceholderImage from "@/components/global/placeholder-image";
 import { cn } from "@/lib/utils";
 
 import CategoryInfo from "./category-info";
+import CategoryInfoSkeleton from "../../skeletons/category-info-skeleton";
 
 type Props = {
   imgURL: string;
@@ -32,7 +33,7 @@ const BannerSection = ({
 }: Props) => {
   return (
     <div className={cn(`relative`, className)}>
-      <Image
+      <PlaceholderImage
         src={imgURL}
         alt={alt}
         height={500}
@@ -48,7 +49,7 @@ const BannerSection = ({
         </CopyUrl>
       </div>
       <div className="flex-center absolute inset-0 rounded-10 bg-transparent">
-        <Suspense fallback={"Loading..."}>
+        <Suspense fallback={<CategoryInfoSkeleton />}>
           <CategoryInfo
             bizId={bizId}
             catalogueId={catalogueId}

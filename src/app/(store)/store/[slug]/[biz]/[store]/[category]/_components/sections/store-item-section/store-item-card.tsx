@@ -4,15 +4,26 @@ import React from "react";
 import Button from "@/components/global/buttons";
 import ASSETS from "@/constants/assets";
 import { parseAmount } from "@/lib/utils/parser";
+import { GetStoreResponse } from "@/types/store/store.response";
 import { StoreItem } from "@/types/store/store.types";
 
 import AddToCartModal from "./add-to-cart-modal";
 
 type Props = {
   storeItem: StoreItem;
+  appointmentType: GetStoreResponse["catalogueAppointmentType"];
+  bookingEnabled: GetStoreResponse["catalogBookingEnabled"];
+  country: string;
+  postalCode: string;
 };
 
-const StoreItemCard = ({ storeItem }: Props) => {
+const StoreItemCard = ({
+  storeItem,
+  appointmentType,
+  bookingEnabled,
+  country,
+  postalCode,
+}: Props) => {
   const imageUrl =
     storeItem.item?.images?.[0]?.img_url || ASSETS.IMAGES.PLACEHOLDER.FYNDR;
   const title = storeItem.item.name;
@@ -40,6 +51,10 @@ const StoreItemCard = ({ storeItem }: Props) => {
             </Button>
           }
           storeItem={storeItem}
+          appointmentType={appointmentType}
+          bookingEnabled={bookingEnabled}
+          country={country}
+          postalCode={postalCode}
         />
       </div>
     </div>

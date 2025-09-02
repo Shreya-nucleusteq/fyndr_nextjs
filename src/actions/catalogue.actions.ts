@@ -19,24 +19,26 @@ import {
   GetStoreItemList,
   GetStoreModifiersList,
   UpdateStoreURL,
-} from "@/types/api-params/catalogue.params";
+} from "@/types/catalogue/catalogue.action.types";
 import {
-  catalogueListResponse,
-  fetchLocationResponse,
-  StoreCategory,
+  CatalogueListResponse,
+  FetchLocationResponse,
   StoreCategoryResponse,
-  StoreItem,
   StoreItemResponse,
-  StoreModifier,
   StoreModifierDelete,
   StoreModifierResponse,
   UpdateURLResponse,
-} from "@/types/api-response/catalogue.response";
+} from "@/types/catalogue/catalogue.response";
+import {
+  StoreCategory,
+  StoreItem,
+  StoreModifier,
+} from "@/types/catalogue/catalogue.types";
 
 export const onGetCatalogueList: GetCatalogueList = async (params) => {
   const endpoint = `${API_BASE_URL}/catalogue/catalogues/fetch/${params.bizid}?pgStart=${params.pgStart || 0}&pgSize=${params.pgSize || 1000}`;
 
-  return _get<catalogueListResponse>(endpoint, {
+  return _get<CatalogueListResponse>(endpoint, {
     requireAuth: true,
   });
 };
@@ -52,7 +54,7 @@ export const onUpdateStoreURL: UpdateStoreURL = async (payload) => {
 export const onGetStoreLocations: GetLocationsList = async (params) => {
   const endpoint = `${API_BASE_URL}/catalogue/fetch_location/${params.store_url}`;
 
-  return _get<fetchLocationResponse>(endpoint, {
+  return _get<FetchLocationResponse>(endpoint, {
     requireAuth: true,
   });
 };

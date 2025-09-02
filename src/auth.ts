@@ -63,6 +63,7 @@ declare module "next-auth" {
     accountStatus?: string | null | any;
     phone?: string | null | any;
     location?: Coordinates | null | any;
+    bizid?: string | null | any;
   }
 }
 

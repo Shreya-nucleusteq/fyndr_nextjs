@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { onDeleteItem } from "@/actions/catalogue.actions";
 import toast from "@/components/global/toast";
-import { StoreItem } from "@/types/api-response/catalogue.response";
+import { StoreItem } from "@/types/catalogue/catalogue.types";
 import { useItemStore } from "@/zustand/stores/store-item.store";
 
 import List from "../../../_components/list";
